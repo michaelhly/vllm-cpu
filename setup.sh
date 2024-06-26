@@ -11,4 +11,4 @@ pip install -r requirements.txt
 pip install -v -r source/requirements-cpu.txt --extra-index-url https://download.pytorch.org/whl/cpu
 
 cd source
-VLLM_TARGET_DEVICE=cpu python setup.py sdist bdist_wheel
+VLLM_TARGET_DEVICE=cpu python setup.py install

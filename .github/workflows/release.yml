@@ -15,20 +15,17 @@ jobs:
           repository: vllm-project/vllm
           path: source
 
-      - name: Install Poetry
-        run: pipx install poetry
-
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: 3.11
-          cache: "poetry"
-
-      - name: Install the project dependencies
-        run: poetry install
+          cache: "pip"
 
       - name: Run setup script
         run: sh setup.sh
+
+      - name: Check Files
+        run: ls -l source/dist
 
       - name: Get vLLM version
         id: vllm
@@ -38,4 +35,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.vllm.outputs.VERSION }}
-          files: dist
+          files: source/dist/*
