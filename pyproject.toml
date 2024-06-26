@@ -10,7 +10,6 @@ package-mode = false
 python = "^3.11"
 
 [tool.poetry.group.dev.dependencies]
-intel-extension-for-pytorch = {version="^2.3.100", markers = "platform_machine == 'x86_64'"}
 wheel = "^0.43.0"
 packaging = "^24.1"
 setuptools = "^70.1.1"
