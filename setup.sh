@@ -6,8 +6,6 @@ apt-get update  -y \
 
 echo 'export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4:$LD_PRELOAD' >> ~/.bashrc
 
-
-pip install -r requirements.txt
 pip install -v -r source/requirements-cpu.txt --extra-index-url https://download.pytorch.org/whl/cpu
 
 cd source
