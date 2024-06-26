@@ -6,6 +6,9 @@ apt-get update  -y \
 
 echo 'export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4:$LD_PRELOAD' >> ~/.bashrc
 
-poetry install
-poetry run pip install -v -r source/requirements-cpu.txt --extra-index-url https://download.pytorch.org/whl/cpu
-VLLM_TARGET_DEVICE=cpu poetry run python source/setup.py sdist bdist_wheel
+
+pip install -r requirements.txt
+pip install -v -r source/requirements-cpu.txt --extra-index-url https://download.pytorch.org/whl/cpu
+
+cd source
+VLLM_TARGET_DEVICE=cpu python setup.py sdist bdist_wheel

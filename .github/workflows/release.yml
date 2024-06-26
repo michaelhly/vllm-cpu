@@ -1,4 +1,4 @@
-name: Package
+name: Release
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Checkout VLLM source
+      - name: Checkout vLLM source
         uses: actions/checkout@v4
         with:
           repository: vllm-project/vllm
@@ -30,5 +30,12 @@ jobs:
       - name: Run setup script
         run: sh setup.sh
 
-      - name: Check files
-        run: ls -l
+      - name: Get vLLM version
+        id: vllm
+        run: echo "VERSION=$(grep -Eo '__version__\s*=\s*"[^"]+"' "source/vllm/version.py" | sed -E 's/__version__\s*=\s*"([^"]+)"/\1/')" > $GITHUB_OUTPUT
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.vllm.outputs.VERSION }}
+          files: dist
