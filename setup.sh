@@ -8,4 +8,4 @@ echo 'export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4:$LD_P
 
 poetry install
 pip install -v -r requirements-cpu.txt --extra-index-url https://download.pytorch.org/whl/cpu
-VLLM_TARGET_DEVICE=cpu poetry python setup.py install
+VLLM_TARGET_DEVICE=cpu poetry python source/setup.py install
