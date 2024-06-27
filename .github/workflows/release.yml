@@ -31,10 +31,10 @@ jobs:
 
       - name: Get vLLM version
         id: vllm
-        run: echo "VERSION=$(grep -Eo '__version__\s*=\s*"[^"]+"' "source/vllm/version.py" | sed -E 's/__version__\s*=\s*"([^"]+)"/\1/')" > $GITHUB_OUTPUT
+        run: echo "VERSION=$(grep -Eo '__version__\s*=\s*"[^"]+"' "vllm/version.py" | sed -E 's/__version__\s*=\s*"([^"]+)"/\1/')" > $GITHUB_OUTPUT
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.vllm.outputs.VERSION }}
-          files: source/dist/*.egg
+          files: dist/*.egg
