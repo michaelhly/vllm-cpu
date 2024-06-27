@@ -8,4 +8,6 @@ pip install --upgrade pip \
     && pip install wheel packaging ninja "setuptools>=49.4.0" numpy
 pip install -v -r requirements-cpu.txt --extra-index-url https://download.pytorch.org/whl/cpu
 
-VLLM_TARGET_DEVICE=cpu python3 setup.py bdist_wheel --dist-dir=dist
+# Support for building with non-AVX512 vLLM: docker build --build-arg VLLM_CPU_DISABLE_AVX512="true" ...
+VLLM_CPU_DISABLE_AVX512="true" VLLM_TARGET_DEVICE=cpu \
+    python3 setup.py bdist_wheel --dist-dir=dist
