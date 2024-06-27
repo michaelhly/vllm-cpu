@@ -7,13 +7,15 @@ jobs:
   vllm-cpu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: Checkout vLLM source
         uses: actions/checkout@v4
         with:
           repository: vllm-project/vllm
-          path: source
+
+      - name: Checkout build script
+        uses: actions/checkout@v4
+        with:
+          path: scripts
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -21,11 +23,8 @@ jobs:
           python-version: 3.11
           cache: "pip"
 
-      - name: Run setup script
-        run: sh setup.sh
-
-      - name: Check Files
-        run: ls -l source/dist
+      - name: Build from source
+        run: sh scripts/build.sh
 
       - name: Get vLLM version
         id: vllm
